@@ -48,25 +48,29 @@ def main():
     cv2.destroyAllWindows()
 
 def stanceTag(cap, framevalues, length):    
-    framevalues.append('0' + ' ' + '|' + ' ' + str(int(cap.get(1))))
-    print (str(int(cap.get(1))), '/', length) 
+    framevalues.append('0' + ' ' + '|' + ' ' + str(int(cap.get(1))))  
     print(framevalues)
+    print (str(int(cap.get(1))), '/', length)
 
 def swingTag(cap, framevalues, length):
     framevalues.append('1' + ' ' + '|' + ' ' + str(int(cap.get(1))))
-    print (str(int(cap.get(1))), '/', length)
     print(framevalues) 
+    print (str(int(cap.get(1))), '/', length)
+    
 
 def unsureTag(cap, framevalues, length):
     framevalues.append('-1' + ' ' + '|' + ' ' + str(int(cap.get(1))))
-    print (str(int(cap.get(1))), '/', length) 
     print(framevalues)
+    print (str(int(cap.get(1))), '/', length) 
+    
 
-def rewindFrames(cap, framevalues, length):
+def rewindFrames(cap, framevalues, length): 
     cap.set(1,((int(cap.get(1)) - 2)))
-    print (int(cap.get(1)), '/', length) 
     framevalues.pop()
-    print(framevalues)  
+    print(framevalues) 
+    print (int(cap.get(1)), '/', length) 
+   
+    
 
 if __name__ == '__main__':
     # this is called if this code was not imported ... ie it was directly run
