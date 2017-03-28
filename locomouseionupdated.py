@@ -1,5 +1,4 @@
 import tkinter
-
 import motionindexthreshold
 import motionindexgenerator
 import stepthroughupdated
