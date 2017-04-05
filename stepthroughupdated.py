@@ -36,16 +36,22 @@ def main():
             unsureTag(cap, framevalues, length)
 
         elif frameclick == ord('q'):
-            with open((selectedvideostring + '.txt'), 'w') as textfile:
-                for item in framevalues:
-                    textfile.write("{}\n".format(item))
+            saveValues(selectedvideostring, framevalues)
+            
             break
 
         else:
             continue
 
+    saveValues(selectedvideostring, framevalues)
+
     cap.release()
     cv2.destroyAllWindows()
+
+def saveValues(selectedvideostring, framevalues):
+    with open((selectedvideostring + '.txt'), 'w') as textfile:
+                for item in framevalues:
+                    textfile.write("{}\n".format(item))
 
 def stanceTag(cap, framevalues, length):    
     framevalues.append('0' + ' ' + '|' + ' ' + str(int(cap.get(1))))  

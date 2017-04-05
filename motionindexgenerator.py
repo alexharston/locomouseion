@@ -56,11 +56,11 @@ def main():
 			print(interframedifference)
 			if interframedifference >= threshold:
 				out.write(cur_frame)
-				VideoFlag.append((str(count) + ' ' + '|' + ' ' + '1' + '\n' ))
+				VideoFlag.append('1' + ' ' + '|' + ' ' + (str(count) + '\n' ))
 				
 			
 			elif interframedifference < threshold:
-			 	VideoFlag.append((str(count) + ' ' + '|' + ' ' + '0' + ' \n'))
+			 	VideoFlag.append('0' + ' ' + '|' + ' ' + (str(count) + '\n' ))
 			
 			count = count + 1
 
