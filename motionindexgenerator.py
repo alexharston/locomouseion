@@ -46,7 +46,7 @@ def main():
 	while (cap.isOpened()):
 
 		try:
-			cv2.imshow("Object Movement", frame_diff(prev_frame, cur_frame, next_frame))
+			cv2.imshow("Mouse Frame Difference", frame_diff(prev_frame, cur_frame, next_frame))
 			prev_frame = cur_frame
 			cur_frame = next_frame
 			next_frame = get_frame(cap)
