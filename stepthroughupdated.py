@@ -5,11 +5,14 @@ from tkinter.filedialog import askopenfilename
 
 def main():
     framevalues = []
+    referenceframe =[]
     count = 1
     selectedvideo = askopenfilename()
     selectedvideostring = str(selectedvideo)
     cap = cv2.VideoCapture(selectedvideo)
     length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+    currentframenumber = cap.get(cv2.CAP_PROP_POS_FRAMES)
+    intcurrentframenumber = int(cap.get(cv2.CAP_PROP_POS_FRAMES))
 
     while (cap.isOpened()): 
         ret, frame = cap.read()
@@ -37,6 +40,7 @@ def main():
 
         elif frameclick == ord('q'):
             saveValues(selectedvideostring, framevalues)
+            saveFinalValues(selectedvideostring)
             
             break
 
@@ -44,29 +48,42 @@ def main():
             continue
 
     saveValues(selectedvideostring, framevalues)
+    saveFinalValues(selectedvideostring)
+
 
     cap.release()
     cv2.destroyAllWindows()
+
+def saveFinalValues(selectedvideostring):
+    with open((selectedvideostring + 'flag.txt')) as aob, open((selectedvideostring + '.txt')) as xyz, open((selectedvideostring + 'outputfile.txt'), 'w') as outputfile:
+        for line in aob:
+            if line.startswith("above"):
+                ab, c = line.split(" | ")
+                d, _ = next(xyz, "UNKNOWN | 0").split(" | ")
+                outputfile.write(" | ".join((d, c)))
+            elif line.startswith("below"):
+                outputfile.write(line)
+                    
 
 def saveValues(selectedvideostring, framevalues):
     with open((selectedvideostring + '.txt'), 'w') as textfile:
                 for item in framevalues:
                     textfile.write("{}\n".format(item))
 
-def stanceTag(cap, framevalues, length):    
-    framevalues.append('0' + ' ' + '|' + ' ' + str(int(cap.get(1))))  
-    print(framevalues)
+def stanceTag(cap, framevalues, length):   
+    framevalues.append('x' + ' ' + '|' + ' ' + str(int(cap.get(1))))  
+    #print(framevalues)
     print (str(int(cap.get(1))), '/', length)
 
 def swingTag(cap, framevalues, length):
-    framevalues.append('1' + ' ' + '|' + ' ' + str(int(cap.get(1))))
-    print(framevalues) 
+    framevalues.append('y' + ' ' + '|' + ' ' + str(int(cap.get(1))))
+    #print(framevalues) 
     print (str(int(cap.get(1))), '/', length)
     
 
 def unsureTag(cap, framevalues, length):
-    framevalues.append('-1' + ' ' + '|' + ' ' + str(int(cap.get(1))))
-    print(framevalues)
+    framevalues.append('z' + ' ' + '|' + ' ' + str(int(cap.get(1))))
+    #print(framevalues)
     print (str(int(cap.get(1))), '/', length) 
     
 

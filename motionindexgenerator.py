@@ -46,7 +46,7 @@ def main():
 	while (cap.isOpened()):
 
 		try:
-			cv2.imshow("Mouse Frame Difference", frame_diff(prev_frame, cur_frame, next_frame))
+			cv2.imshow("Video Frame Difference", frame_diff(prev_frame, cur_frame, next_frame))
 			prev_frame = cur_frame
 			cur_frame = next_frame
 			next_frame = get_frame(cap)
@@ -56,11 +56,11 @@ def main():
 			print(interframedifference)
 			if interframedifference >= threshold:
 				out.write(cur_frame)
-				VideoFlag.append('1' + ' ' + '|' + ' ' + (str(count) + '\n' ))
+				VideoFlag.append('above' + ' ' + '|' + ' ' + (str(count) + '\n' ))
 				
 			
 			elif interframedifference < threshold:
-			 	VideoFlag.append('0' + ' ' + '|' + ' ' + (str(count) + '\n' ))
+			 	VideoFlag.append('below' + ' ' + '|' + ' ' + (str(count) + '\n' ))
 			
 			count = count + 1
 
@@ -70,7 +70,7 @@ def main():
 		except:
 			break
 
-	with open((selectedvideo + 'flag' + '.txt'), 'w') as f:
+	with open((selectedvideo + 'motionindexed.aviflag.txt'), 'w') as f:
 		for item in VideoFlag:
 			f.write((str(item) + '\n'))
 		print(VideoFlag)
