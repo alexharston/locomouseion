@@ -45,7 +45,7 @@ def main():
             break
 
         else:
-            continue
+            pass
 
     saveValues(selectedvideostring, framevalues)
     saveFinalValues(selectedvideostring)
