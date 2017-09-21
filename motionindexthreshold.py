@@ -69,7 +69,7 @@ def main():
 	plt.plot(MIaverage)
 
 	print("click to input first point and again to list second point")
-	startinput = plt.ginput(2)
+	startinput = plt.ginput(2, timeout=0)
 	print("clicked", startinput)
 	startinputxs = [x[0] for x in startinput]
 	print(startinputxs)

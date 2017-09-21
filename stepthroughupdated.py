@@ -1,7 +1,7 @@
 import cv2
 import tkinter as tk
 from tkinter.filedialog import askopenfilename
-
+import matplotlib.pyplot as plt
 
 def main():
     framevalues = []
