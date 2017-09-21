@@ -27,16 +27,14 @@ def main():
 	MIList = []
 	VideoFlag = []
 	count = 1
-	selectedvideo = askopenfilename()
-	cap = cv2.VideoCapture(selectedvideo)
-	length = cap.get(cv2.CAP_PROP_FRAME_COUNT)
-	intlength = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-	currentframenumber = cap.get(cv2.CAP_PROP_POS_FRAMES)
-	intcurrentframenumber = int(cap.get(cv2.CAP_PROP_POS_FRAMES))
+	cap = cv2.VideoCapture(askopenfilename())
+	length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+	currentframenumber = int(cap.get(cv2.CAP_PROP_POS_FRAMES))
+
 	scaling_factor = 1
 	fourcc = cv2.VideoWriter_fourcc(*'XVID')
-	out = cv2.VideoWriter((selectedvideo + 'motionindexed.avi'),fourcc, 60.0, (640,478), isColor=False)
-	with open((selectedvideo + 'threshold' + '.txt'), 'r') as readthreshold:
+	out = cv2.VideoWriter((askopenfilename() + 'motionindexed.avi'),fourcc, 60.0, (640,478), isColor=False)
+	with open((askopenfilename() + 'threshold' + '.txt'), 'r') as readthreshold:
 		threshold = float(readthreshold.readline())
 	
 	prev_frame = get_frame(cap)
@@ -53,15 +51,14 @@ def main():
 			differencesquared = (next_frame-cur_frame)**2
 			interframedifference = np.sum(differencesquared)
 			MIList.append(interframedifference)
-			print(interframedifference)
 			if interframedifference >= threshold:
 				out.write(cur_frame)
 				VideoFlag.append('above' + ' ' + '|' + ' ' + (str(count) + '\n' ))
-				
 			
 			elif interframedifference < threshold:
 			 	VideoFlag.append('below' + ' ' + '|' + ' ' + (str(count) + '\n' ))
 			
+			#iterate the count
 			count = count + 1
 
 			key = cv2.waitKey(1)
@@ -80,8 +77,6 @@ def main():
 	cv2.destroyAllWindows()
 
 if __name__ == '__main__':
-    # this is called if this code was not imported ... ie it was directly run
-    # if this is called, that means there is no GUI already running, so we need to create a root
     root = tk.Tk()
     root.withdraw()
     main()
