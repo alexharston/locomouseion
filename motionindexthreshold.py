@@ -39,11 +39,7 @@ def main():
 	videoname = selectedvideo.split(os.sep)[-1]
 	videofolder = selectedvideo.split(os.sep)[-2]
 
-	if str.join('.', videoname.split('.')[:-1]) == str.join(' ', videofolder.split(' ')[:-1])
-
-	selectedvideo = os.path.join(selectedvideo, videonames)
-
-	else:
+	if not str.join('.', videoname.split('.')[:-1]) is str.join(' ', videofolder.split(' ')[:-1]):
 		while True:
 			name = simpledialog.askstring("Input", "Enter your first name", initialvalue="Unnamed")
 			name2 = name.replace(" ", "")
