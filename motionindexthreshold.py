@@ -28,14 +28,24 @@ def moving_average(MIList, n=30):
     return ret[n - 1:] / n
 
 def main():
-
 	MIList =[]
 	root = tk.Tk()
 	root.withdraw()
+	
+	#Generate name window
+	tk.Label(root, text="Enter your name: ").grid(row=0)
+	entry = Entry(root)
+	entry.grid(row=0, column=0)
+	print(entry.get())
+
+
 	selectedvideo = askopenfilename()
-	os.mkdir(selectedvideo.split('.')[0])
-	shutil.move(selectedvideo, os.path.join(selectedvideo.split('.')[0], selectedvideo.split(os.sep)[-1]))
-	selectedvideo = os.path.join(selectedvideo.split('.')[0], selectedvideo.split(os.sep)[-1])
+	videopath = str.join('.', selectedvideo.split('.')[:-1] #gets rid of .mkv but leaves entire filepath intact otherwise
+	if not os.path.exists(videopath): #check if folder is present or not
+		os.mkdir(videopath) #if not, make a folder
+		shutil.move(selectedvideo, os.path.join(videopath, selectedvideo.split(os.sep)[-1])) #move the video file inside this folder
+	
+	selectedvideo = os.path.join(videopath, selectedvideo.split(os.sep)[-1])
 	cap = cv2.VideoCapture(selectedvideo)
 	length = cap.get(cv2.CAP_PROP_FRAME_COUNT)
 	intlength = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
@@ -91,7 +101,7 @@ def main():
 	print(newthreshold)
 	
 
-	with open((selectedvideo.split('.')[0].split(os.sep)[-1] + ' threshold.txt'), 'w') as f:
+	with open((os.path.join(str.join('.', selectedvideo.split('.')[:-1], ' threshold.txt'), 'w') as f:
 		f.write(str(newthreshold))
 	plt.show()
 
