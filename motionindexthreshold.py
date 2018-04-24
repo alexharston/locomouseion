@@ -32,7 +32,7 @@ def main():
 	root = tk.Tk()
 	root.withdraw()
 	
-	print(simpledialog.askstring("Input", "What is your name?"))
+	name = simpledialog.askstring("Input", "What is your name?")
 	 
 	#Generate name window
 	# tk.Label(root, text="Enter your name: ").grid(row=0)
@@ -42,7 +42,7 @@ def main():
 
 
 	selectedvideo = askopenfilename()
-	videopath = str.join('.', selectedvideo.split('.')[:-1]) #gets rid of .mkv but leaves entire filepath intact otherwise
+	videopath = str.join('.', selectedvideo.split('.')[:-1]) + ' ' + name #gets rid of .mkv but leaves entire filepath intact otherwise
 	
 	if not os.path.exists(videopath): #check if folder is present or not
 		os.mkdir(videopath) #if not, make a folder
