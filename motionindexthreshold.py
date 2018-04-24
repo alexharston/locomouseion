@@ -43,7 +43,8 @@ def main():
 	else:
 		while True:
 			name = simpledialog.askstring("Input", "What is your name?", initialvalue="Unnamed")
-			if name == "Unnamed" or "" or " " or not name:
+			name2 = name.replace(" ", "")
+			if name2 == "Unnamed" or not name2:
 				messagebox.showerror("Error", "Please enter a name")	
 			else:
 				break
