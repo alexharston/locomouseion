@@ -33,7 +33,7 @@ def main():
 	root = tk.Tk()
 	root.withdraw()
 		 
-	selectedvideo = askopenfilename(defaultextensions='.mkv', filetypes=['MKV Files', '*.mkv'], title='Select .MKV video file')
+	selectedvideo = askopenfilename(defaultextension='.mkv', filetypes=['MKV Files', '*.mkv'], title='Select .MKV video file')
 	
 	#str.join(' ', selectedvideo.split(' ')[:-1])
 	videoname = selectedvideo.split(os.sep)[-1]
