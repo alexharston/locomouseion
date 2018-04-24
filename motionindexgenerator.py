@@ -34,8 +34,8 @@ def main():
 
 	scaling_factor = 1
 	fourcc = cv2.VideoWriter_fourcc(*'XVID')
-	out = cv2.VideoWriter((str.join('.', selectedvideo.split('.')[:-1])  + ' motionindexed.avi'),fourcc, 60.0, (640,478), isColor=False)
-	with open((str.join('.', selectedvideo.split('.')[:-1]) + ' threshold' + '.txt'), 'r') as readthreshold:
+	out = cv2.VideoWriter(str.join('.', selectedvideo.split('.')[:-1])  + ' motionindexed.avi'),fourcc, 60.0, (640,478), isColor=False)
+	with open(str.join('.', selectedvideo.split('.')[:-1]) + ' threshold' + '.txt', 'r') as readthreshold:
 		threshold = float(readthreshold.readline())
 	
 	prev_frame = get_frame(cap)
@@ -69,7 +69,7 @@ def main():
 			break
 	
 	
-	with open((str.join('.', selectedvideo.split('.')[:-1]) + ' motionindexed flag.txt'), 'w') as f:
+	with open(str.join('.', selectedvideo.split('.')[:-1]) + ' motionindexed flag.txt', 'w') as f:
 		for item in VideoFlag:
 			f.write((str(item) + '\n'))
 		print(VideoFlag)

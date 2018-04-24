@@ -54,9 +54,9 @@ def main():
     cv2.destroyAllWindows()
 
 def saveFinalValues(selectedvideo):
-    with open((str.join('.', selectedvideo.split('.')[:-1]) + ' flag.txt')) as aob, \
-         open((str.join('.', selectedvideo.split('.')[:-1]) + '.txt')) as xyz, \
-         open((str.join('.', selectedvideo.split('.')[:-1]) + ' outputfile.txt'), 'w') as outputfile:
+    with open(str.join('.', selectedvideo.split('.')[:-1]) + ' flag.txt') as aob, \
+         open(str.join('.', selectedvideo.split('.')[:-1]) + '.txt') as xyz, \
+         open(str.join('.', selectedvideo.split('.')[:-1]) + ' outputfile.txt', 'w') as outputfile:
         for line in aob:
             if line.startswith("above"):
                 ab, c = line.split(" | ")
@@ -66,7 +66,7 @@ def saveFinalValues(selectedvideo):
                 outputfile.write(line)
                     
 def saveValues(selectedvideo, framevalues):
-    with open((str.join('.', selectedvideo.split('.')[:-1]) + '.txt'), 'w') as textfile:
+    with open(str.join('.', selectedvideo.split('.')[:-1]) + '.txt', 'w') as textfile:
                 for item in framevalues:
                     textfile.write("{}\n".format(item))
 

@@ -102,7 +102,7 @@ def main():
 	print(newthreshold)
 	
 
-	with open((os.path.join(str.join('.', selectedvideo.split('.')[:-1]), ' threshold.txt'), 'w') as f:
+	with open(os.path.join(str.join('.', selectedvideo.split('.')[:-1]), ' threshold.txt'), 'w') as f:
 		f.write(str(newthreshold))
 	plt.show()
 
