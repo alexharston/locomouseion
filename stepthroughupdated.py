@@ -8,7 +8,6 @@ def main():
     referenceframe =[]
     count = 1
     selectedvideo = askopenfilename()
-    selectedvideostring = str(selectedvideo)
     cap = cv2.VideoCapture(selectedvideo)
     length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
     currentframenumber = cap.get(cv2.CAP_PROP_POS_FRAMES)
@@ -39,23 +38,25 @@ def main():
             unsureTag(cap, framevalues, length)
 
         elif frameclick == ord('q'):
-            saveValues(selectedvideostring, framevalues)
-            saveFinalValues(selectedvideostring)
+            saveValues(selectedvideo, framevalues)
+            saveFinalValues(selectedvideo)
             
             break
 
         else:
             pass
 
-    saveValues(selectedvideostring, framevalues)
-    saveFinalValues(selectedvideostring)
+    saveValues(selectedvideo, framevalues)
+    saveFinalValues(selectedvideo)
 
 
     cap.release()
     cv2.destroyAllWindows()
 
-def saveFinalValues(selectedvideostring):
-    with open((selectedvideostring + 'flag.txt')) as aob, open((selectedvideostring + '.txt')) as xyz, open((selectedvideostring + 'outputfile.txt'), 'w') as outputfile:
+def saveFinalValues(selectedvideo):
+    with open((selectedvideo.split('.')[0].split(os.sep)[-1] + ' flag.txt')) as aob, \
+         open((selectedvideo.split('.')[0].split(os.sep)[-1] + '.txt')) as xyz, \
+         open((selectedvideo.split('.')[0].split(os.sep)[-1] + ' outputfile.txt'), 'w') as outputfile:
         for line in aob:
             if line.startswith("above"):
                 ab, c = line.split(" | ")
@@ -64,9 +65,8 @@ def saveFinalValues(selectedvideostring):
             elif line.startswith("below"):
                 outputfile.write(line)
                     
-
-def saveValues(selectedvideostring, framevalues):
-    with open((selectedvideostring + '.txt'), 'w') as textfile:
+def saveValues(selectedvideo, framevalues):
+    with open((selectedvideo.split('.')[0].split(os.sep)[-1] + '.txt'), 'w') as textfile:
                 for item in framevalues:
                     textfile.write("{}\n".format(item))
 

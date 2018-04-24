@@ -84,10 +84,9 @@ def main():
 	newthreshold = (np.mean(subMIList) + (np.std(subMIList) * 3))
 	plt.axhline(y=newthreshold)
 	print(newthreshold)
-	with open((selectedvideo + 'threshold' + '.txt'), 'w') as f:
+	with open((selectedvideo.split('.')[0].split(os.sep)[-1] + ' threshold' + '.txt'), 'w') as f:
 		f.write(str(newthreshold))
 	plt.show()
-
 
 	cap.release()
 	cv2.destroyAllWindows()

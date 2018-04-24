@@ -27,14 +27,15 @@ def main():
 	MIList = []
 	VideoFlag = []
 	count = 1
-	cap = cv2.VideoCapture(askopenfilename())
+	selectedvideo = askopenfilename()
+	cap = cv2.VideoCapture(selectedvideo)
 	length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
 	currentframenumber = int(cap.get(cv2.CAP_PROP_POS_FRAMES))
 
 	scaling_factor = 1
 	fourcc = cv2.VideoWriter_fourcc(*'XVID')
-	out = cv2.VideoWriter((askopenfilename() + 'motionindexed.avi'),fourcc, 60.0, (640,478), isColor=False)
-	with open((askopenfilename() + 'threshold' + '.txt'), 'r') as readthreshold:
+	out = cv2.VideoWriter((selectedvideo.split('.')[0].split(os.sep)[-1] + ' motionindexed.avi'),fourcc, 60.0, (640,478), isColor=False)
+	with open((selectedvideo.split('.')[0].split(os.sep)[-1] + ' threshold' + '.txt'), 'r') as readthreshold:
 		threshold = float(readthreshold.readline())
 	
 	prev_frame = get_frame(cap)
@@ -66,11 +67,12 @@ def main():
 				break
 		except:
 			break
-
-	with open((selectedvideo + 'motionindexed.aviflag.txt'), 'w') as f:
+	
+	with open((selectedvideo.split('.')[0].split(os.sep)[-1] + ' motionindexed flag.txt'), 'w') as f:
 		for item in VideoFlag:
 			f.write((str(item) + '\n'))
 		print(VideoFlag)
+	
 
 
 	cap.release()
