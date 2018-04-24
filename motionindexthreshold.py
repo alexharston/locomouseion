@@ -40,7 +40,8 @@ def main():
 
 
 	selectedvideo = askopenfilename()
-	videopath = str.join('.', selectedvideo.split('.')[:-1] #gets rid of .mkv but leaves entire filepath intact otherwise
+	videopath = str.join('.', selectedvideo.split('.')[:-1]) #gets rid of .mkv but leaves entire filepath intact otherwise
+	
 	if not os.path.exists(videopath): #check if folder is present or not
 		os.mkdir(videopath) #if not, make a folder
 		shutil.move(selectedvideo, os.path.join(videopath, selectedvideo.split(os.sep)[-1])) #move the video file inside this folder
