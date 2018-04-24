@@ -33,21 +33,25 @@ def main():
 	root = tk.Tk()
 	root.withdraw()
 		 
-	selectedvideo = askopenfilename(title='Select video file or your working folder.')
+	selectedvideo = askopenfilename(defaultextensions='.mkv', filetypes=['MKV Files', '*.mkv'], title='Select .MKV video file')
 	
-	if os.path.isdir(selectedvideo):
-		str.join(' ', selectedvideo.split(' ')[:-1])
-		videonames = str.join(' ', selectedvideo.split(' ')[:-1]).split('/')[-1]
-		selectedvideo = os.path.join(selectedvideo, videonames)
+	#str.join(' ', selectedvideo.split(' ')[:-1])
+	videoname = selectedvideo.split(os.sep)[-1]
+	videofolder = selectedvideo.split(os.sep)[-2]
+
+	if str.join('.', videoname.split('.')[:-1]) == str.join(' ', videofolder.split(' ')[:-1])
+
+	selectedvideo = os.path.join(selectedvideo, videonames)
 
 	else:
 		while True:
-			name = simpledialog.askstring("Input", "What is your name?", initialvalue="Unnamed")
+			name = simpledialog.askstring("Input", "Enter your first name", initialvalue="Unnamed")
 			name2 = name.replace(" ", "")
 			if name2 == "Unnamed" or not name2:
-				messagebox.showerror("Error", "Please enter a name")	
+				messagebox.showerror("Error", "Please enter your first name")	
 			else:
 				break
+		name.replace(" ", "_")
 		
 		videopath = str.join('.', selectedvideo.split('.')[:-1]) + ' ' + name #gets rid of .mkv but leaves entire filepath intact otherwise
 		

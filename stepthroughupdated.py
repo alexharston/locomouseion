@@ -7,7 +7,7 @@ def main():
     framevalues = []
     referenceframe =[]
     count = 1
-    selectedvideo = askopenfilename(filetypes=['.avi'], title="Select your .AVI file from your working folder")
+    selectedvideo = askopenfilename(defaultextension='.avi', filetypes=['AVI files', '*.avi')], title="Select your .AVI file from your working folder")
     cap = cv2.VideoCapture(selectedvideo)
     length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
     currentframenumber = cap.get(cv2.CAP_PROP_POS_FRAMES)
