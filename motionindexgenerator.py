@@ -27,7 +27,7 @@ def main():
 	MIList = []
 	VideoFlag = []
 	count = 1
-	selectedvideo = askopenfilename(defaultextension='.mkv',filetypes=('MKV Files', '*.mkv'), title="Select your .MKV file from your working folder")
+	selectedvideo = askopenfilename(title="Select your .MKV file from your working folder")
 	cap = cv2.VideoCapture(selectedvideo)
 	length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
 	currentframenumber = int(cap.get(cv2.CAP_PROP_POS_FRAMES))
