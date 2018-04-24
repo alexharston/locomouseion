@@ -2,6 +2,7 @@ import cv2
 import tkinter as tk
 from tkinter.filedialog import askopenfilename 
 from tkinter import simpledialog
+from tkinter import messagebox
 import numpy as np 
 import os
 import matplotlib.pyplot as plt 
@@ -31,24 +32,30 @@ def main():
 	MIList =[]
 	root = tk.Tk()
 	root.withdraw()
-	
-	name = simpledialog.askstring("Input", "What is your name?")
-	 
-	#Generate name window
-	# tk.Label(root, text="Enter your name: ").grid(row=0)
-	# entry = tk.Entry(root)
-	# entry.grid(row=0, column=0)
-	# print(entry.get())
-
-
+		 
 	selectedvideo = askopenfilename()
-	videopath = str.join('.', selectedvideo.split('.')[:-1]) + ' ' + name #gets rid of .mkv but leaves entire filepath intact otherwise
 	
-	if not os.path.exists(videopath): #check if folder is present or not
-		os.mkdir(videopath) #if not, make a folder
-		shutil.move(selectedvideo, os.path.join(videopath, selectedvideo.split(os.sep)[-1])) #move the video file inside this folder
-	
-	selectedvideo = os.path.join(videopath, selectedvideo.split(os.sep)[-1])
+	if os.path.isdir(selectedvideo):
+		str.join(' ', selectedvideo.split(' ')[:-1])
+		videonames = str.join(' ', selectedvideo.split(' ')[:-1]).split('/')[-1]
+		selectedvideo = os.path.join(selectedvideo, videonames)
+
+	else:
+		while True:
+			name = simpledialog.askstring("Input", "What is your name?", initialvalue="Unnamed")
+			if name == "Unnamed" or "" or " " or not name:
+				messagebox.showerror("Error", "Please enter a name")	
+			else:
+				break
+		
+		videopath = str.join('.', selectedvideo.split('.')[:-1]) + ' ' + name #gets rid of .mkv but leaves entire filepath intact otherwise
+		
+		if not os.path.exists(videopath): #check if folder is present or not
+			os.mkdir(videopath) #if not, make a folder
+			shutil.move(selectedvideo, os.path.join(videopath, selectedvideo.split(os.sep)[-1])) #move the video file inside this folder
+		
+		selectedvideo = os.path.join(videopath, selectedvideo.split(os.sep)[-1])
+
 	cap = cv2.VideoCapture(selectedvideo)
 	length = cap.get(cv2.CAP_PROP_FRAME_COUNT)
 	intlength = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
