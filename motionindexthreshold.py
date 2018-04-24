@@ -33,7 +33,7 @@ def main():
 	root = tk.Tk()
 	root.withdraw()
 		 
-	selectedvideo = askopenfilename()
+	selectedvideo = askopenfilename(title='Select video file or your working folder.')
 	
 	if os.path.isdir(selectedvideo):
 		str.join(' ', selectedvideo.split(' ')[:-1])
