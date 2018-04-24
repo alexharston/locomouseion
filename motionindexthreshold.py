@@ -1,7 +1,7 @@
 import cv2
 import tkinter as tk
 from tkinter.filedialog import askopenfilename 
-from tkinter import messagebox
+from tkinter import simpledialog
 import numpy as np 
 import os
 import matplotlib.pyplot as plt 
@@ -32,11 +32,13 @@ def main():
 	root = tk.Tk()
 	root.withdraw()
 	
+	print(simpledialog.askstring("Input", "What is your name?"))
+	 
 	#Generate name window
-	tk.Label(root, text="Enter your name: ").grid(row=0)
-	entry = tk.Entry(root)
-	entry.grid(row=0, column=0)
-	print(entry.get())
+	# tk.Label(root, text="Enter your name: ").grid(row=0)
+	# entry = tk.Entry(root)
+	# entry.grid(row=0, column=0)
+	# print(entry.get())
 
 
 	selectedvideo = askopenfilename()
