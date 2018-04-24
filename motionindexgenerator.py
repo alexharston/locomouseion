@@ -68,13 +68,12 @@ def main():
 		except:
 			break
 	
+	
 	with open((selectedvideo.split('.')[0].split(os.sep)[-1] + ' motionindexed flag.txt'), 'w') as f:
 		for item in VideoFlag:
 			f.write((str(item) + '\n'))
 		print(VideoFlag)
 	
-
-
 	cap.release()
 	cv2.destroyAllWindows()
 

@@ -1,6 +1,7 @@
 import cv2
 import tkinter as tk
-from tkinter.filedialog import askopenfilename
+from tkinter.filedialog import askopenfilename 
+from tkinter import messagebox
 import numpy as np 
 import os
 import matplotlib.pyplot as plt 
@@ -31,6 +32,9 @@ def main():
 	root = tk.Tk()
 	root.withdraw()
 	selectedvideo = askopenfilename()
+	os.mkdir(selectedvideo.split('.')[0])
+	shutil.move(selectedvideo, os.path.join(selectedvideo.split('.')[0], selectedvideo.split(os.sep)[-1]))
+	selectedvideo = os.path.join(selectedvideo.split('.')[0], selectedvideo.split(os.sep)[-1])
 	cap = cv2.VideoCapture(selectedvideo)
 	length = cap.get(cv2.CAP_PROP_FRAME_COUNT)
 	intlength = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
@@ -84,7 +88,9 @@ def main():
 	newthreshold = (np.mean(subMIList) + (np.std(subMIList) * 3))
 	plt.axhline(y=newthreshold)
 	print(newthreshold)
-	with open((selectedvideo.split('.')[0].split(os.sep)[-1] + ' threshold' + '.txt'), 'w') as f:
+	
+
+	with open((selectedvideo.split('.')[0].split(os.sep)[-1] + ' threshold.txt'), 'w') as f:
 		f.write(str(newthreshold))
 	plt.show()
 
