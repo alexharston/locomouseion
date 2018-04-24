@@ -34,7 +34,7 @@ def main():
 	
 	#Generate name window
 	tk.Label(root, text="Enter your name: ").grid(row=0)
-	entry = Entry(root)
+	entry = tk.Entry(root)
 	entry.grid(row=0, column=0)
 	print(entry.get())
 
